@@ -1,8 +1,7 @@
 import fs from 'fs';
 
 export interface Context {
-  fs: typeof fs,
-  rootDir: string
+  fs: typeof fs
 }
 
 export interface TestResults {

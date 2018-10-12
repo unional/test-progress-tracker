@@ -1,42 +1,43 @@
-import fs from 'fs';
 import rimraf from 'rimraf';
 import { append } from './append';
+import { ROOT } from './constants';
+import { initInternal } from './initInternal';
 import { load } from './load';
-import { setup } from './setup';
-import { noCoverage, coverageNoPercentage } from './testResultsExamples';
+import { coverageNoPercentage, noCoverage } from './testResultsExamples';
 
 test('create new file', () => {
   const rootDir = '.new_file'
-  setup({ rootDir })
 
   try {
-    append({ fs, rootDir }, noCoverage)
+    initInternal({ rootDir })
+    append(undefined, noCoverage)
 
-    const entries = load({ fs, rootDir })
+    const entries = load(undefined)
     expect(entries.length).toBe(1)
   }
   finally {
+    initInternal({ rootDir: ROOT })
     rimraf.sync(rootDir)
   }
 })
 
 test('append to file', () => {
   const rootDir = '.append_file'
-  setup({ rootDir })
 
   try {
-    append({ fs, rootDir }, noCoverage)
-    append({ fs, rootDir }, noCoverage)
+    initInternal({ rootDir })
+    append(undefined, noCoverage)
+    append(undefined, noCoverage)
 
-    const entries = load({ fs, rootDir })
+    const entries = load(undefined)
     expect(entries.length).toBe(2)
   }
   finally {
+    initInternal({ rootDir: ROOT })
     rimraf.sync(rootDir)
   }
 })
 
 test('context can be undefined', () => {
-  setup()
   append(undefined, coverageNoPercentage)
 })

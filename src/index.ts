@@ -1,6 +1,3 @@
-import { setup } from './setup';
-
 export * from './append';
+export * from './init';
 export * from './load';
-
-setup()
