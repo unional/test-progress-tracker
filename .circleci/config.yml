@@ -87,7 +87,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: npm ci
-      - run: npm ci --no-save semantic-release greenkeeper-lockfile
+      - run: npm install --no-save semantic-release greenkeeper-lockfile
       - save_cache:
           paths:
             - node_modules
