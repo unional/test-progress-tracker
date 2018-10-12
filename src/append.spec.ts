@@ -3,7 +3,7 @@ import rimraf from 'rimraf';
 import { append } from './append';
 import { load } from './load';
 import { setup } from './setup';
-import { noCoverage } from './testResultsExamples';
+import { noCoverage, coverageNoPercentage } from './testResultsExamples';
 
 test('create new file', () => {
   const rootDir = '.new_file'
@@ -34,4 +34,9 @@ test('append to file', () => {
   finally {
     rimraf.sync(rootDir)
   }
+})
+
+test('context can be undefined', () => {
+  setup()
+  append(undefined, coverageNoPercentage)
 })
