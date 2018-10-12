@@ -2,7 +2,7 @@ module.exports = {
   'preset': 'ts-jest',
   'reporters': [
     'default',
-    // 'jest-audio-reporter',
+    'jest-audio-reporter',
   ],
   'roots': [
     '<rootDir>/src'
