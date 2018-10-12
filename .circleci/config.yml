@@ -32,7 +32,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run verify-ci
+      - run: npm run verify
       - run: npx codecov
       - store_test_results:
           path: reports/junit
@@ -53,7 +53,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run verify-ci
+      - run: npm run verify
       - store_test_results:
           path: reports/junit
   node8:
@@ -73,7 +73,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run verify-ci
+      - run: npm run verify
       - store_test_results:
           path: reports/junit
   release:
