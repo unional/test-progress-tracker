@@ -9,6 +9,10 @@ import { unpartial } from 'unpartial'
 export function load(context?: Partial<Context>) {
   const c = unpartial({ fs, rootDir: ROOT }, context)
   const filepath = path.join(c.rootDir, TEST_RESULT_FILENAME)
+  if (!c.fs.existsSync(filepath)) {
+    return []
+  }
+
   const content = c.fs.readFileSync(filepath, 'utf-8')
   const entries = content.split('\n')
   return entries.reduce<TestResults[]>((r, e) => {

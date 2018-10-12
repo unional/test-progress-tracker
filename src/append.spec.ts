@@ -2,12 +2,10 @@ import fs from 'fs';
 import rimraf from 'rimraf';
 import { append } from './append';
 import { load } from './load';
-import { setup } from './setup';
-import { noCoverage, coverageNoPercentage } from './testResultsExamples';
+import { coverageNoPercentage, noCoverage } from './testResultsExamples';
 
 test('create new file', () => {
   const rootDir = '.new_file'
-  setup({ rootDir })
 
   try {
     append({ fs, rootDir }, noCoverage)
@@ -22,7 +20,6 @@ test('create new file', () => {
 
 test('append to file', () => {
   const rootDir = '.append_file'
-  setup({ rootDir })
 
   try {
     append({ fs, rootDir }, noCoverage)
@@ -37,6 +34,5 @@ test('append to file', () => {
 })
 
 test('context can be undefined', () => {
-  setup()
   append(undefined, coverageNoPercentage)
 })
