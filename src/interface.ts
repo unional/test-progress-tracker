@@ -13,6 +13,7 @@ export interface TestResults {
   numPassedTestSuites: number;
   numTotalTests: number;
   numTotalTestSuites: number;
+  filtered?: boolean;
   coverage?: CoverageSummary
 }
 
