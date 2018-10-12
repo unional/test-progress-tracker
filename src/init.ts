@@ -1,8 +1,6 @@
-import mkdirp from 'mkdirp';
 import { ROOT } from './constants';
-import { store } from './store';
+import { initInternal } from './initInternal';
 
-export function init(context = { rootDir: ROOT }) {
-  mkdirp.sync(context.rootDir)
-  store.set({ rootDir: context.rootDir })
+export function init() {
+  initInternal({ rootDir: ROOT })
 }
