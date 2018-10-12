@@ -19,7 +19,29 @@ export const noCoverageMinified = {
   ts: 7,
   s: 8
 }
+export const filtered = {
+  duration: 1,
+  filtered: true,
+  numFailedTests: 2,
+  numFailedTestSuites: 3,
+  numPassedTests: 4,
+  numPassedTestSuites: 5,
+  numTotalTests: 6,
+  numTotalTestSuites: 7,
+  startTime: 8
+}
 
+export const filteredMinified = {
+  d: 1,
+  fl: true,
+  f: 2,
+  fs: 3,
+  p: 4,
+  ps: 5,
+  t: 6,
+  ts: 7,
+  s: 8
+}
 export const coverageNoPercentage = {
   duration: 1,
   numFailedTests: 2,

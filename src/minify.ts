@@ -2,6 +2,7 @@ import { TestResults, CoverageSummary } from './interface';
 
 export interface MinifiedTestResult {
   d: number,
+  fl?: boolean,
   f: number,
   fs: number,
   p: number,
@@ -19,7 +20,7 @@ export interface MinifiedCoverageSummary {
 }
 
 export function minify(testResults: TestResults) {
-  const { duration, numFailedTests, numFailedTestSuites, numPassedTests, numPassedTestSuites, numTotalTests, numTotalTestSuites, startTime, coverage } = testResults
+  const { duration, filtered, numFailedTests, numFailedTestSuites, numPassedTests, numPassedTestSuites, numTotalTests, numTotalTestSuites, startTime, coverage } = testResults
 
   const result: MinifiedTestResult = {
     d: duration,
@@ -30,6 +31,9 @@ export function minify(testResults: TestResults) {
     t: numTotalTests,
     ts: numTotalTestSuites,
     s: startTime
+  }
+  if (filtered) {
+    result.fl = filtered
   }
   if (coverage) {
     result.c = minifyCoverage(coverage)
@@ -64,6 +68,9 @@ export function unminify(minified: MinifiedTestResult) {
     numTotalTests: minified.t,
     numTotalTestSuites: minified.ts,
     startTime: minified.s
+  }
+  if (minified.fl) {
+    result.filtered = minified.fl
   }
   if (minified.c) {
     result.coverage = unminifyCoverage(minified.c)
