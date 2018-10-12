@@ -32,7 +32,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run verify-ci
+      - run: npm run verify
       - run: npx codecov
       - store_test_results:
           path: reports/junit
@@ -47,13 +47,13 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: npm ci
-      - run: npm ci --no-save jest-junit codecov
+      - run: npm install
+      - run: npm install --no-save jest-junit codecov
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run verify-ci
+      - run: npm run verify
       - store_test_results:
           path: reports/junit
   node8:
@@ -67,13 +67,13 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: npm ci
-      - run: npm ci --no-save jest-junit
+      - run: npm install
+      - run: npm install --no-save jest-junit
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run verify-ci
+      - run: npm run verify
       - store_test_results:
           path: reports/junit
   release:
