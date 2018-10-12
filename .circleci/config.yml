@@ -1,0 +1,102 @@
+version: 2
+workflows:
+  version: 2
+  all:
+    jobs:
+      - node-latest
+      - node9
+      - node8
+      - release:
+          filters:
+              branches:
+                  only: master
+          requires:
+            - node-latest
+            - node9
+            - node8
+jobs:
+  node-latest:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: npm ci
+      - run: npm ci --no-save jest-junit
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run verify-ci
+      - run: npx codecov
+      - store_test_results:
+          path: reports/junit
+  node9:
+    docker:
+      - image: 'circleci/node:9'
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: npm ci
+      - run: npm ci --no-save jest-junit codecov
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run verify-ci
+      - store_test_results:
+          path: reports/junit
+  node8:
+    docker:
+      - image: 'circleci/node:8'
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: npm ci
+      - run: npm ci --no-save jest-junit
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run verify-ci
+      - store_test_results:
+          path: reports/junit
+  release:
+    docker:
+      - image: 'circleci/node:10'
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: npm ci
+      - run: npm ci --no-save semantic-release greenkeeper-lockfile
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: update greenkeeper lockfile
+          command: ./node_modules/.bin/greenkeeper-lockfile-update
+      - run: npm run build
+      - run:
+          name: upload greenkeeper lockfile
+          command: ./node_modules/.bin/greenkeeper-lockfile-upload
+      - run: npx semantic-release
