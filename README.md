@@ -15,7 +15,7 @@ Test Progress Tracker.
 
 [npm-image]: https://img.shields.io/npm/v/@unional/test-progress-tracker.svg?style=flat
 [npm-url]: https://npmjs.org/package/@unional/test-progress-tracker
-[downloads-image]: https://img.shields.io/npm/dm/test-progress-tracker.svg?style=flat
+[downloads-image]: https://img.shields.io/npm/dm/@unional/test-progress-tracker.svg?style=flat
 [downloads-url]: https://npmjs.org/package/@unional/test-progress-tracker
 [circleci-image]: https://circleci.com/gh/unional/test-progress-tracker/tree/master.svg?style=shield
 [circleci-url]: https://circleci.com/gh/unional/test-progress-tracker/tree/master
