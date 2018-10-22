@@ -8,9 +8,8 @@ import { initInternal } from './initInternal';
 import { TestResults } from './interface';
 import { MonitorSubscription } from './monitor';
 import { store } from './store';
-import { noCoverage, filtered } from './testResultsExamples';
+import { filtered, noCoverage } from './testResultsExamples';
 import rimraf = require('rimraf');
-import delay from 'delay';
 
 test('callback invoked with last save entry initially', async () => {
   const rootDir = 'fixtures/monitor-first'
