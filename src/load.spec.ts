@@ -1,9 +1,9 @@
-import t from 'assert'
+import t from 'assert';
 import { load } from './load';
 import { store } from './store';
 
-test('not exist', () => {
+test('not exist', async () => {
   store.set({ rootDir: 'not-exist' })
-  const actual = load(undefined)
+  const actual = await load(undefined)
   t.strictEqual(actual.length, 0)
 })

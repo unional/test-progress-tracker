@@ -5,14 +5,14 @@ import { initInternal } from './initInternal';
 import { load } from './load';
 import { coverageNoPercentage, noCoverage } from './testResultsExamples';
 
-test('create new file', () => {
+test('create new file', async () => {
   const rootDir = '.new_file'
 
   try {
     initInternal({ rootDir })
-    append(undefined, noCoverage)
+    await append(undefined, noCoverage)
 
-    const entries = load(undefined)
+    const entries = await load(undefined)
     expect(entries.length).toBe(1)
   }
   finally {
@@ -21,15 +21,15 @@ test('create new file', () => {
   }
 })
 
-test('append to file', () => {
+test('append to file', async () => {
   const rootDir = '.append_file'
 
   try {
     initInternal({ rootDir })
-    append(undefined, noCoverage)
-    append(undefined, noCoverage)
+    await append(undefined, noCoverage)
+    await append(undefined, noCoverage)
 
-    const entries = load(undefined)
+    const entries = await load(undefined)
     expect(entries.length).toBe(2)
   }
   finally {
@@ -38,6 +38,6 @@ test('append to file', () => {
   }
 })
 
-test('context can be undefined', () => {
-  append(undefined, coverageNoPercentage)
+test('context can be undefined', async () => {
+  await append(undefined, coverageNoPercentage)
 })
