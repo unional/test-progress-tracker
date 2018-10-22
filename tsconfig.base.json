@@ -8,12 +8,14 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "newLine": "LF",
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "dist",
     "removeComments": false,
     "sourceMap": true,
-    "strict": true,
+    "strictNullChecks": true,
+    // "strictFunctionTypes": true,
     "target": "es2015"
   },
   "files": [

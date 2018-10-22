@@ -1,7 +1,8 @@
 import fs from 'fs';
 
-export interface Context {
-  fs: typeof fs
+export interface FSContext<FSKeys extends keyof typeof fs> {
+  fs: Pick<typeof fs, FSKeys>,
+  filepath: string
 }
 
 export interface TestResults {

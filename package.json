@@ -1,12 +1,21 @@
 {
   "name": "@unional/test-progress-tracker",
-  "description": "Keep track of test progress over time",
   "version": "0.0.0-development",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "description": "Keep track of test progress over time",
+  "homepage": "https://github.com/unional/test-progress-tracker",
+  "bugs": {
+    "url": "https://github.com/unional/test-progress-tracker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unional/test-progress-tracker.git"
+  },
+  "license": "MIT",
   "files": [
     "dist"
   ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.base.json",
     "clean": "rimraf dist",
@@ -15,40 +24,41 @@
     "lint": "tslint -p tsconfig.json",
     "test": "tsc && jest",
     "verify": "npm run lint && npm run build && npm run coverage && npm run dependency-check",
+    "verify-ci": "npm run lint && npm run build && jest --coverage --config jest.config.ci.json && npm run dependency-check",
     "watch": "jest --watch"
   },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/unional/test-progress-tracker.git"
-  },
-  "bugs": {
-    "url": "https://github.com/unional/test-progress-tracker/issues"
-  },
-  "homepage": "https://github.com/unional/test-progress-tracker",
-  "devDependencies": {
-    "@types/jest": "^23.3.5",
-    "@types/lz-string": "^1.3.32",
-    "@types/mkdirp": "^0.5.2",
-    "@types/node": "^10.11.7",
-    "@types/rimraf": "^2.0.2",
-    "dependency-check": "^3.2.1",
-    "eslint": "^5.7.0",
-    "eslint-plugin-unional": "^1.0.0",
-    "jest": "^23.6.0",
-    "jest-audio-reporter": "^2.0.1",
-    "jest-watch-suspend": "^1.1.0",
-    "jest-watch-toggle-config": "^1.0.2",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^23.10.4",
-    "tslint": "^5.11.0",
-    "tslint-config-unional": "^0.10.0",
-    "typescript": "^3.1.3"
-  },
   "dependencies": {
+    "chokidar": "^2.0.4",
+    "delay": "^4.1.0",
     "global-store": "^0.7.3",
     "lz-string": "^1.4.4",
     "mkdirp": "^0.5.1",
     "unpartial": "^0.4.1"
+  },
+  "devDependencies": {
+    "@types/chokidar": "^1.7.5",
+    "@types/jest": "^23.3.5",
+    "@types/lz-string": "^1.3.32",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^10.12.0",
+    "@types/rimraf": "^2.0.2",
+    "assertron": "^5.2.0",
+    "codecov": "^3.1.0",
+    "dependency-check": "^3.2.1",
+    "eslint": "^5.7.0",
+    "eslint-plugin-unional": "^1.0.0",
+    "greenkeeper-lockfile": "^1.15.1",
+    "jest": "^23.6.0",
+    "jest-audio-reporter": "^2.0.2",
+    "jest-junit": "^5.2.0",
+    "jest-watch-suspend": "^1.1.0",
+    "jest-watch-toggle-config": "^1.0.2",
+    "rimraf": "^2.6.2",
+    "semantic-release": "^15.10.5",
+    "ts-jest": "^23.10.4",
+    "tslint": "^5.11.0",
+    "tslint-config-unional": "^0.10.0",
+    "tslint-language-service": "^0.9.9",
+    "typescript": "^3.1.3"
   }
 }
