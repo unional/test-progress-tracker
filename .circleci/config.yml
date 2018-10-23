@@ -3,9 +3,15 @@ workflows:
   version: 2
   all:
     jobs:
-      - node-latest
-      - node9
-      - node8
+      - node-latest:
+          requires:
+            - prepare
+      - node9:
+          requires:
+            - prepare
+      - node8:
+          requires:
+            - prepare
       - release:
           filters:
             branches:
@@ -15,7 +21,13 @@ workflows:
             - node9
             - node8
 jobs:
-  node-latest:
+  local-test:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: npm run verify
+  prepare:
     docker:
       - image: circleci/node:10
     steps:
@@ -34,10 +46,18 @@ jobs:
           key: node_modules-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
+  node-latest:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node_modules cache
+          key: node_modules-{{ checksum "package-lock.json" }}
       - run: npm run verify-ci
       - run: npx codecov
       - store_test_results:
-          path: reports/junit
+          path: .reports/junit
   node9:
     docker:
       - image: 'circleci/node:9'
@@ -46,21 +66,9 @@ jobs:
       - restore_cache:
           name: Restore node_modules cache
           key: node_modules-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install Dependencies
-          command: |
-            if [ ! -d node_modules ]; then
-              sudo npm install -g npm@$NPM_VERSION
-              npm ci
-            fi
-      - save_cache:
-          name: Save node modules cache
-          key: node_modules-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
       - run: npm run verify-ci
       - store_test_results:
-          path: reports/junit
+          path: .reports/junit
   node8:
     docker:
       - image: 'circleci/node:8'
@@ -69,21 +77,9 @@ jobs:
       - restore_cache:
           name: Restore node_modules cache
           key: node_modules-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install Dependencies
-          command: |
-            if [ ! -d node_modules ]; then
-              sudo npm install -g npm@$NPM_VERSION
-              npm ci
-            fi
-      - save_cache:
-          name: Save node modules cache
-          key: node_modules-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
       - run: npm run verify-ci
       - store_test_results:
-          path: reports/junit
+          path: .reports/junit
   release:
     docker:
       - image: circleci/node:10

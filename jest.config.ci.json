@@ -9,7 +9,7 @@
     [
       "jest-junit",
       {
-        "output": "reports/junit/js-test-results.xml"
+        "output": ".reports/junit/js-test-results.xml"
       }
     ]
   ]

@@ -10,6 +10,7 @@ import { MonitorSubscription } from './monitor';
 import { store } from './store';
 import { filtered, noCoverage } from './testResultsExamples';
 import rimraf = require('rimraf');
+import delay from 'delay';
 
 test('callback invoked with last save entry initially', async () => {
   const rootDir = 'fixtures/monitor-first'
@@ -132,6 +133,8 @@ test('trigger on new file', async () => {
 
     const actual = await new Promise<TestResults>(async a => {
       sub = monitor({ filepath, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } }, (_, testResults) => a(testResults))
+      // Add a small delay because in circleci it seems like chokidar can't pick up the next append (new file).
+      await delay(10)
       await append({ filepath }, noCoverage)
     })
     t.deepStrictEqual(actual, noCoverage)
