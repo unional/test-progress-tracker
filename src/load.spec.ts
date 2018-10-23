@@ -3,7 +3,7 @@ import { load } from '.';
 import { store } from './store';
 
 test('not exist', async () => {
-  store.set({ rootDir: 'not-exist' })
+  store.set({ rootDir: 'fixtures/not-exist' })
   const actual = await load(undefined)
   t.strictEqual(actual.length, 0)
 })

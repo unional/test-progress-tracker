@@ -2,6 +2,9 @@ import fs from 'fs';
 
 export interface FSContext<FSKeys extends keyof typeof fs> {
   fs: Pick<typeof fs, FSKeys>,
+  /**
+   * Root directory (of the project).
+   */
   rootDir: string
 }
 

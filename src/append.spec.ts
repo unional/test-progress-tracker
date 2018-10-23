@@ -1,10 +1,9 @@
 import rimraf from 'rimraf';
-import { ROOT } from './constants';
 import { init, append, load } from '.';
 import { coverageNoPercentage, noCoverage } from './testResultsExamples';
 
 test('create new file', async () => {
-  const rootDir = '.new_file'
+  const rootDir = 'fixtures/new_file'
 
   try {
     init({ rootDir })
@@ -14,13 +13,13 @@ test('create new file', async () => {
     expect(entries.length).toBe(1)
   }
   finally {
-    init({ rootDir: ROOT })
+    init()
     rimraf.sync(rootDir)
   }
 })
 
 test('append to file', async () => {
-  const rootDir = '.append_file'
+  const rootDir = 'fixtures/append_file'
 
   try {
     init({ rootDir })
@@ -31,7 +30,7 @@ test('append to file', async () => {
     expect(entries.length).toBe(2)
   }
   finally {
-    init({ rootDir: ROOT })
+    init()
     rimraf.sync(rootDir)
   }
 })
