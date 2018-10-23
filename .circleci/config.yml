@@ -75,7 +75,7 @@ jobs:
           name: Install Dependencies
           command: |
             if [ ! -d node_modules ]; then
-              npm i -g npm@*
+              sudo npm install -g npm@$NPM_VERSION
               npm ci
             fi
       - save_cache:
@@ -98,7 +98,7 @@ jobs:
           name: Install Dependencies
           command: |
             if [ ! -d node_modules ]; then
-              npm i -g npm@*
+              sudo npm install -g npm@$NPM_VERSION
               npm ci
             fi
       - save_cache:

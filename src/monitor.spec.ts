@@ -3,11 +3,11 @@ import { AssertOrder } from 'assertron';
 import delay from 'delay';
 import fs from 'fs';
 import path from 'path';
+import rimraf from 'rimraf';
 import { append, init, monitor, MonitorSubscription, TestResults } from '.';
 import { ROOT, TEST_RESULT_FILENAME } from './constants';
 import { store } from './store';
 import { filtered, noCoverage } from './testResultsExamples';
-import rimraf = require('rimraf');
 
 test('callback invoked with last save entry initially', async () => {
   const rootDir = 'fixtures/monitor-first'
