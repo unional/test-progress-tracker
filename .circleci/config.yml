@@ -3,16 +3,9 @@ workflows:
   version: 2
   all:
     jobs:
-      - prepare
-      - node-latest:
-          requires:
-            - prepare
-      - node9:
-          requires:
-            - prepare
-      - node8:
-          requires:
-            - prepare
+      - node-latest
+      - node9
+      - node8
       - release:
           filters:
             branches:
@@ -55,6 +48,17 @@ jobs:
       - restore_cache:
           name: Restore node_modules cache
           key: node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: |
+            if [ ! -d node_modules ]; then
+              npm ci
+            fi
+      - save_cache:
+          name: Save node modules cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - run: npm run verify-ci
       - run: npx codecov
       - store_test_results:
@@ -67,6 +71,18 @@ jobs:
       - restore_cache:
           name: Restore node_modules cache
           key: node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: |
+            if [ ! -d node_modules ]; then
+              npm i -g npm@*
+              npm ci
+            fi
+      - save_cache:
+          name: Save node modules cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - run: npm run verify-ci
       - store_test_results:
           path: .reports/junit
@@ -78,6 +94,18 @@ jobs:
       - restore_cache:
           name: Restore node_modules cache
           key: node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: |
+            if [ ! -d node_modules ]; then
+              npm i -g npm@*
+              npm ci
+            fi
+      - save_cache:
+          name: Save node modules cache
+          key: node_modules-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - run: npm run verify-ci
       - store_test_results:
           path: .reports/junit
