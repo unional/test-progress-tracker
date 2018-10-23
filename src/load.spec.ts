@@ -1,5 +1,5 @@
 import t from 'assert';
-import { load } from './load';
+import { load } from '.';
 import { store } from './store';
 
 test('not exist', async () => {

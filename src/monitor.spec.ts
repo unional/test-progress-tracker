@@ -1,22 +1,19 @@
 import t from 'assert';
 import { AssertOrder } from 'assertron';
+import delay from 'delay';
 import fs from 'fs';
 import path from 'path';
-import { append, monitor } from '.';
+import { append, init, monitor, MonitorSubscription, TestResults } from '.';
 import { ROOT, TEST_RESULT_FILENAME } from './constants';
-import { initInternal } from './initInternal';
-import { TestResults } from './interface';
-import { MonitorSubscription } from './monitor';
 import { store } from './store';
 import { filtered, noCoverage } from './testResultsExamples';
 import rimraf = require('rimraf');
-import delay from 'delay';
 
 test('callback invoked with last save entry initially', async () => {
   const rootDir = 'fixtures/monitor-first'
   let sub: MonitorSubscription | undefined
   try {
-    initInternal({ rootDir })
+    init({ rootDir })
     await append({ rootDir }, filtered)
     await append({ rootDir }, noCoverage)
 
@@ -29,7 +26,7 @@ test('callback invoked with last save entry initially', async () => {
   }
   finally {
     if (sub) sub.close()
-    initInternal({ rootDir: ROOT })
+    init({ rootDir: ROOT })
     rimraf.sync(rootDir)
   }
 })
@@ -38,7 +35,7 @@ test('extra empty line in the file is ignored', async () => {
   const rootDir = 'fixtures/monitor-extra-empty-line'
   let sub: MonitorSubscription | undefined
   try {
-    initInternal({ rootDir })
+    init({ rootDir })
     await append({ rootDir }, noCoverage)
     const filepath = path.join(rootDir, TEST_RESULT_FILENAME)
     fs.appendFileSync(filepath, '\n')
@@ -52,7 +49,7 @@ test('extra empty line in the file is ignored', async () => {
   }
   finally {
     if (sub) sub.close()
-    initInternal({ rootDir: ROOT })
+    init({ rootDir: ROOT })
     rimraf.sync(rootDir)
   }
 })
@@ -72,12 +69,12 @@ test('callback not invoked when result file not exist', async () => {
   const rootDir = 'fixtures/monitor-no-file'
   let sub: MonitorSubscription | undefined
   try {
-    initInternal({ rootDir })
+    init({ rootDir })
     sub = monitor({ rootDir }, () => { throw new Error('should not call') })
   }
   finally {
     if (sub) sub.close()
-    initInternal({ rootDir: ROOT })
+    init({ rootDir: ROOT })
     rimraf.sync(rootDir)
   }
 })
@@ -87,7 +84,7 @@ test('delete result file should not trigger', async () => {
 
   let sub: MonitorSubscription | undefined
   try {
-    initInternal({ rootDir })
+    init({ rootDir })
     await append({ rootDir }, noCoverage)
 
     const o = new AssertOrder()
@@ -97,7 +94,7 @@ test('delete result file should not trigger', async () => {
   }
   finally {
     if (sub) sub.close()
-    initInternal({ rootDir: ROOT })
+    init({ rootDir: ROOT })
     rimraf.sync(rootDir)
   }
 })
@@ -106,7 +103,7 @@ test('trigger on change', async () => {
   const rootDir = 'fixtures/monitor-change'
   let sub: MonitorSubscription | undefined
   try {
-    initInternal({ rootDir })
+    init({ rootDir })
     await append({ rootDir }, noCoverage)
     const o = new AssertOrder(2)
     sub = monitor({ rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } }, () => o.any([1, 2]))
@@ -115,7 +112,7 @@ test('trigger on change', async () => {
   }
   finally {
     if (sub) sub.close()
-    initInternal({ rootDir: ROOT })
+    init({ rootDir: ROOT })
     rimraf.sync(rootDir)
   }
 })
@@ -124,7 +121,7 @@ test('trigger on new file', async () => {
   const rootDir = 'fixtures/monitor-new'
   let sub: MonitorSubscription | undefined
   try {
-    initInternal({ rootDir })
+    init({ rootDir })
 
     const actual = await new Promise<TestResults>(async a => {
       sub = monitor({ rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } }, (_, testResults) => a(testResults))
@@ -136,7 +133,7 @@ test('trigger on new file', async () => {
   }
   finally {
     if (sub) sub.close()
-    initInternal({ rootDir: ROOT })
+    init({ rootDir: ROOT })
     rimraf.sync(rootDir)
   }
 })
