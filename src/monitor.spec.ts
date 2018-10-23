@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import rimraf from 'rimraf';
 import { append, init, monitor, MonitorSubscription, TestResults } from '.';
-import { ROOT, TEST_RESULT_FILENAME } from './constants';
+import { TEST_RESULT_FILENAME } from './constants';
 import { store } from './store';
 import { filtered, noCoverage } from './testResultsExamples';
 
@@ -26,7 +26,7 @@ test('callback invoked with last save entry initially', async () => {
   }
   finally {
     if (sub) sub.close()
-    init({ rootDir: ROOT })
+    init()
     rimraf.sync(rootDir)
   }
 })
@@ -49,7 +49,7 @@ test('extra empty line in the file is ignored', async () => {
   }
   finally {
     if (sub) sub.close()
-    init({ rootDir: ROOT })
+    init()
     rimraf.sync(rootDir)
   }
 })
@@ -74,7 +74,7 @@ test('callback not invoked when result file not exist', async () => {
   }
   finally {
     if (sub) sub.close()
-    init({ rootDir: ROOT })
+    init()
     rimraf.sync(rootDir)
   }
 })
@@ -90,11 +90,11 @@ test('delete result file should not trigger', async () => {
     const o = new AssertOrder()
     sub = monitor({ rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } }, () => o.once(1))
     const filePath = path.join(rootDir, TEST_RESULT_FILENAME)
-    fs.unlinkSync(filePath)
+    rimraf.sync(filePath)
   }
   finally {
     if (sub) sub.close()
-    init({ rootDir: ROOT })
+    init()
     rimraf.sync(rootDir)
   }
 })
@@ -112,7 +112,7 @@ test('trigger on change', async () => {
   }
   finally {
     if (sub) sub.close()
-    init({ rootDir: ROOT })
+    init()
     rimraf.sync(rootDir)
   }
 })
@@ -133,7 +133,7 @@ test('trigger on new file', async () => {
   }
   finally {
     if (sub) sub.close()
-    init({ rootDir: ROOT })
+    init()
     rimraf.sync(rootDir)
   }
 })

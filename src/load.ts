@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { unpartial } from 'unpartial';
 import { decompress } from './compress';
-import { TEST_RESULT_FILENAME } from './constants';
+import { TEST_RESULT_FILENAME, PROGRESS_FOLDER } from './constants';
 import { FSContext, TestResults } from './interface';
 import { unminify } from './minify';
 import { store } from './store';
@@ -14,7 +14,7 @@ let promisifiedReadFile = promisify(fs.readFile)
 export async function load(context?: Partial<FSContext<'readFile'>>) {
   const c = unpartial<FSContext<'readFile'>>({ fs, rootDir: store.get().rootDir }, context)
 
-  const filepath = path.join(c.rootDir, TEST_RESULT_FILENAME)
+  const filepath = path.join(c.rootDir, PROGRESS_FOLDER, TEST_RESULT_FILENAME)
 
   // istanbul ignore next
   if (c.fs.readFile !== readFile) {

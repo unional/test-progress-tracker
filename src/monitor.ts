@@ -5,7 +5,7 @@ import readline from 'readline';
 import { Stream } from 'stream';
 import { unpartial } from 'unpartial';
 import { decompress } from './compress';
-import { TEST_RESULT_FILENAME } from './constants';
+import { TEST_RESULT_FILENAME, PROGRESS_FOLDER } from './constants';
 import { TestResults } from './interface';
 import { unminify } from './minify';
 import { store } from './store';
@@ -39,7 +39,7 @@ export function monitor(context: Partial<MonitorContext & GetLastLineContext> | 
     rootDir: store.get().rootDir,
     awaitWriteFinish: true
   }, context)
-  const filepath = path.join(c.rootDir, TEST_RESULT_FILENAME)
+  const filepath = path.join(c.rootDir, PROGRESS_FOLDER, TEST_RESULT_FILENAME)
 
   if (fs.existsSync(filepath))
     invokeCallback(c, filepath, callback)
