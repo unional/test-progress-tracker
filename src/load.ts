@@ -12,7 +12,9 @@ let readFile = fs.readFile
 let promisifiedReadFile = promisify(fs.readFile)
 
 export async function load(context?: Partial<FSContext<'readFile'>>) {
-  const c = unpartial<FSContext<'readFile'>>({ fs, filepath: path.join(store.get().rootDir, TEST_RESULT_FILENAME) }, context)
+  const c = unpartial<FSContext<'readFile'>>({ fs, rootDir: store.get().rootDir }, context)
+
+  const filepath = path.join(c.rootDir, TEST_RESULT_FILENAME)
 
   // istanbul ignore next
   if (c.fs.readFile !== readFile) {
@@ -21,7 +23,7 @@ export async function load(context?: Partial<FSContext<'readFile'>>) {
   }
 
   try {
-    const content = await promisifiedReadFile(c.filepath, 'utf-8')
+    const content = await promisifiedReadFile(filepath, 'utf-8')
     const entries = content.split('\n')
     return entries.reduce<TestResults[]>((r, e) => {
       if (!e) return r

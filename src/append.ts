@@ -14,8 +14,9 @@ let promisifedAppendFile = promisify(fs.appendFile)
 
 
 export async function append(context: Partial<FSContext<'appendFile'>> | undefined, results: TestResults) {
-  const c = unpartial<FSContext<'appendFile'>>({ fs, filepath: path.join(store.get().rootDir, TEST_RESULT_FILENAME) }, context)
+  const c = unpartial<FSContext<'appendFile'>>({ fs, rootDir: store.get().rootDir }, context)
 
+  const filepath = path.join(c.rootDir, TEST_RESULT_FILENAME)
   const minified = minify(results)
   const compressed = compress(minified)
 
@@ -25,7 +26,7 @@ export async function append(context: Partial<FSContext<'appendFile'>> | undefin
     promisifedAppendFile = promisify(appendFile)
   }
 
-  await promisifedAppendFile(c.filepath, compressed + '\n')
+  await promisifedAppendFile(filepath, compressed + '\n')
   // There seems to be some concurrency issue when two appends are executed next to each other.
   // This causes the `monitor()` test sometimes get stucked.
   // While this should not happen in live code,

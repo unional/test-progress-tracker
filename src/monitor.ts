@@ -12,7 +12,7 @@ import { store } from './store';
 
 export interface MonitorContext {
   fs: Pick<typeof fs, 'watch'>,
-  filepath: string
+  rootDir: string
   awaitWriteFinish: AwaitWriteFinishOptions | boolean;
 }
 
@@ -36,10 +36,10 @@ export function monitor(context: Partial<MonitorContext & GetLastLineContext> | 
   const c = unpartial<MonitorContext & GetLastLineContext>({
     fs,
     readline,
-    filepath: path.join(store.get().rootDir, TEST_RESULT_FILENAME),
+    rootDir: store.get().rootDir,
     awaitWriteFinish: true
   }, context)
-  const filepath = c.filepath
+  const filepath = path.join(c.rootDir, TEST_RESULT_FILENAME)
 
   if (fs.existsSync(filepath))
     invokeCallback(c, filepath, callback)

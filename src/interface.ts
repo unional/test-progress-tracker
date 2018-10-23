@@ -2,7 +2,7 @@ import fs from 'fs';
 
 export interface FSContext<FSKeys extends keyof typeof fs> {
   fs: Pick<typeof fs, FSKeys>,
-  filepath: string
+  rootDir: string
 }
 
 export interface TestResults {
