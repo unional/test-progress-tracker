@@ -32,7 +32,6 @@
     "chokidar": "^2.0.4",
     "delay": "^4.1.0",
     "global-store": "^0.7.3",
-    "lz-string": "^1.4.4",
     "mkdirp": "^0.5.1",
     "unpartial": "^0.4.1"
   },
