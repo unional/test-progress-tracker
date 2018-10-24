@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import rimraf from 'rimraf';
 import { append, init, monitor, MonitorSubscription, TestResults } from '.';
-import { TEST_RESULT_FILENAME } from './constants';
+import { TEST_RESULT_FILENAME, PROGRESS_FOLDER } from './constants';
 import { store } from './store';
 import { filtered, noCoverage } from './testResultsExamples';
 
@@ -37,7 +37,7 @@ test('extra empty line in the file is ignored', async () => {
   try {
     init({ rootDir })
     await append({ rootDir }, noCoverage)
-    const filepath = path.join(rootDir, TEST_RESULT_FILENAME)
+    const filepath = path.join(rootDir, PROGRESS_FOLDER, TEST_RESULT_FILENAME)
     fs.appendFileSync(filepath, '\n')
 
     const actual = await new Promise(a => {
