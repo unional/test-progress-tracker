@@ -1,6 +1,6 @@
 import rimraf from 'rimraf';
-import { init, append, load } from '.';
-import { coverageNoPercentage, noCoverage } from './testResultsExamples';
+import { append, init, load } from '.';
+import { noCoverage } from './testResultsExamples';
 
 test('create new file', async () => {
   const rootDir = 'fixtures/new_file'
@@ -33,8 +33,4 @@ test('append to file', async () => {
     init()
     rimraf.sync(rootDir)
   }
-})
-
-test('context can be undefined', async () => {
-  await append(undefined, coverageNoPercentage)
 })

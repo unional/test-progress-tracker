@@ -32,7 +32,6 @@
     "chokidar": "^2.0.4",
     "delay": "^4.1.0",
     "global-store": "^0.7.3",
-    "lz-string": "^1.4.4",
     "mkdirp": "^0.5.1",
     "unpartial": "^0.4.1"
   },
@@ -43,6 +42,7 @@
     "@types/mkdirp": "^0.5.2",
     "@types/node": "^10.12.0",
     "@types/rimraf": "^2.0.2",
+    "@unional/jest-progress-reporter": "^1.0.0",
     "assertron": "^5.2.0",
     "codecov": "^3.1.0",
     "dependency-check": "^3.2.1",
