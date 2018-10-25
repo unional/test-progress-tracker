@@ -148,10 +148,10 @@ test('file already exists will call once', async () => {
     await new Promise<TestResults>(async a => {
       sub = monitor({ rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } }, () => count++)
       // Add a small delay because in circleci it seems like chokidar can't pick up the next append (new file).
-      await delay(50)
+      await delay(100)
       a()
     })
-    t.deepStrictEqual(count, 1)
+    t.strictEqual(count, 1)
   }
   finally {
     if (sub) sub.close()

@@ -27,9 +27,4 @@ export async function append(context: Partial<FSContext<'appendFile'>> | undefin
   }
 
   await promisifedAppendFile(filepath, compressed + '\n')
-  // There seems to be some concurrency issue when two appends are executed next to each other.
-  // This causes the `monitor()` test sometimes get stucked.
-  // While this should not happen in live code,
-  // place a small delay just in case.
-  await delay(10)
 }
