@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "chokidar": "^2.0.4",
-    "delay": "^4.1.0",
     "global-store": "^0.7.3",
     "mkdirp": "^0.5.1",
     "unpartial": "^0.4.1"
@@ -44,6 +43,7 @@
     "@unional/jest-progress-reporter": "^2.0.0",
     "assertron": "^5.2.0",
     "codecov": "^3.1.0",
+    "delay": "^4.1.0",
     "dependency-check": "^3.2.1",
     "eslint": "^5.7.0",
     "eslint-plugin-unional": "^1.0.0",
