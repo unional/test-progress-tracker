@@ -18,6 +18,7 @@ module.exports = {
     [
       'jest-watch-suspend'
     ],
+    'jest-watch-repeat',
     [
       'jest-watch-toggle-config',
       {
