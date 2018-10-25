@@ -1,5 +1,5 @@
 {
-  "name": "@unional/test-progress-tracker",
+  "name": "test-progress-tracker",
   "version": "0.0.0-development",
   "description": "Keep track of test progress over time",
   "homepage": "https://github.com/unional/test-progress-tracker",
@@ -25,8 +25,7 @@
     "test": "tsc && jest",
     "verify": "npm run lint && npm run build && npm run coverage && npm run dependency-check",
     "verify-ci": "npm run lint && npm run build && jest --coverage --config jest.config.ci.json && npm run dependency-check",
-    "watch": "jest --watch",
-    "semantic-release": "semantic-release"
+    "watch": "jest --watch"
   },
   "dependencies": {
     "chokidar": "^2.0.4",

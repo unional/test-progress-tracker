@@ -41,14 +41,9 @@ export function monitor(context: Partial<MonitorContext & GetLastLineContext> | 
   }, context)
   const filepath = path.join(c.rootDir, PROGRESS_FOLDER, TEST_RESULT_FILENAME)
 
-  if (fs.existsSync(filepath))
-    invokeCallback(c, filepath, callback)
   const w = chokidar.watch(filepath, { awaitWriteFinish: c.awaitWriteFinish })
-  w.on('all', (event, path) => {
-    if (event === 'add' || event === 'change') {
-      invokeCallback(c, path, callback)
-    }
-  })
+  w.on('add', path => invokeCallback(c, path, callback))
+  w.on('change', path => invokeCallback(c, path, callback))
   return { close: w.close.bind(w) }
 }
 

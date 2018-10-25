@@ -6,21 +6,21 @@ import rimraf = require('rimraf');
 
 test('create folder if not exist', () => {
   try {
-    t.strictEqual(fs.existsSync('fixtures/create-if-not-exist'), false)
-    init({ rootDir: 'fixtures/create-if-not-exist' })
+    t.strictEqual(fs.existsSync('fixtures/init/create-if-not-exist'), false)
+    init({ rootDir: 'fixtures/init/create-if-not-exist' })
   }
   finally {
-    rimraf.sync('fixtures/create-if-not-exist')
+    rimraf.sync('fixtures/init/create-if-not-exist')
   }
 })
 
 test('ok if folder already existed', () => {
   try {
-    fs.mkdirSync('fixtures/exist')
-    init({ rootDir: 'fixtures/exist' })
+    fs.mkdirSync('fixtures/init/exist')
+    init({ rootDir: 'fixtures/init/exist' })
   }
   finally {
-    rimraf.sync('fixtures/exist')
+    rimraf.sync('fixtures/init/exist')
   }
 })
 
