@@ -58,6 +58,9 @@ jobs:
             - node_modules
       - run: npm run verify-ci
       - run: npx codecov
+      - run:
+          name: Update coverage to Codacy
+          command: cat ./coverage/lcov.info | codacy-coverage
       - store_test_results:
           path: .reports/junit
   node10:
