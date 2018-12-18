@@ -1,5 +1,7 @@
 # test-progress-tracker
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c2383b46635443ad99b88c75237620fa)](https://app.codacy.com/app/homawong/test-progress-tracker?utm_source=github.com&utm_medium=referral&utm_content=unional/test-progress-tracker&utm_campaign=Badge_Grade_Settings)
+
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][downloads-image]][downloads-url]
 [![Circle CI][circleci-image]][circleci-url]
