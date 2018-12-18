@@ -46,6 +46,7 @@ jobs:
           command: |
             if [ ! -d node_modules ]; then
               npm ci
+              npm i --no-save jest-junit
             fi
       - save_cache:
           name: Save node modules cache
@@ -58,9 +59,6 @@ jobs:
             - node_modules
       - run: npm run verify-ci
       - run: npx codecov
-      - run:
-          name: Update coverage to Codacy
-          command: npm run codacy-coverage
       - store_test_results:
           path: .reports/junit
   node10:

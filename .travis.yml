@@ -30,6 +30,7 @@ after_success:
   # - ./scripts/run-on-node-version.sh 10 "npm install -g coveralls codecov"
   # - npm install -g travis-deploy-once
   # - travis-deploy-once "npm run semantic-release"
+  - ./scripts/run-on-node-version.sh 11 "npm install -g codacy-coverage && cat ./coverage/lcov.info | codacy-coverage"
   - ./scripts/run-on-node-version.sh 11 "npm install -g coveralls && cat ./coverage/lcov.info | coveralls"
   # - ./scripts/run-on-node-version.sh 10 "codecov"
 
