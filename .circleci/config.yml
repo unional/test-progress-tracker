@@ -22,6 +22,7 @@ workflows:
               only: master
           requires:
             - node-latest
+            - node10
             - node9
             - node8
             - node6
