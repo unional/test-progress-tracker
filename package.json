@@ -41,7 +41,6 @@
     "@types/mkdirp": "^0.5.2",
     "@types/node": "^10.12.0",
     "@types/rimraf": "^2.0.2",
-    "@unional/jest-progress-reporter": "^2.0.0",
     "assertron": "^5.2.0",
     "codecov": "^3.1.0",
     "delay": "^4.1.0",
