@@ -19,6 +19,7 @@
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.base.json",
     "clean": "rimraf dist",
+    "codacy-coverage": "cat ./coverage/lcov.info | codacy-coverage",
     "coverage": "jest --coverage",
     "dependency-check": "dependency-check . --unused --no-dev && dependency-check . --missing --no-dev",
     "lint": "tslint -p tsconfig.json",
@@ -42,6 +43,7 @@
     "@types/node": "^10.12.0",
     "@types/rimraf": "^2.0.2",
     "assertron": "^5.2.0",
+    "codacy-coverage": "^3.3.0",
     "codecov": "^3.1.0",
     "delay": "^4.1.0",
     "dependency-check": "^3.2.1",
