@@ -38,14 +38,15 @@ jobs:
       - image: circleci/node:11
     steps:
       - checkout
-      - restore_cache:
-          name: Restore node_modules cache
-          key: node_modules-{{ checksum "package-lock.json" }}
+      # - restore_cache:
+      #     name: Restore node_modules cache
+      #     key: node_modules-{{ checksum "package-lock.json" }}
       - run:
           name: Install Dependencies
           command: |
             if [ ! -d node_modules ]; then
               npm ci
+              npm i --no-save jest-junit
             fi
       - save_cache:
           name: Save node modules cache
