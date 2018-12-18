@@ -4,12 +4,18 @@ workflows:
   all:
     jobs:
       - node-latest
+      - node10:
+          requires:
+            - node-latest
       - node9:
           requires:
             - node-latest
       - node8:
           requires:
             - node-latest
+      # - node6:
+      #     requires:
+      #       - node-latest
       - release:
           filters:
             branches:
@@ -18,16 +24,17 @@ workflows:
             - node-latest
             - node9
             - node8
+            # - node6
 jobs:
   local-test:
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:11
     steps:
       - checkout
       - run: npm run verify
   node-latest:
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:11
     steps:
       - checkout
       - restore_cache:
@@ -50,6 +57,17 @@ jobs:
             - node_modules
       - run: npm run verify-ci
       - run: npx codecov
+      - run: npm install --no-save coveralls && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+      - store_test_results:
+          path: .reports/junit
+  node10:
+    docker:
+      - image: 'circleci/node:9'
+    steps:
+      - checkout
+      - attach_workspace:
+          at: '.'
+      - run: npm run verify-ci
       - store_test_results:
           path: .reports/junit
   node9:
@@ -72,9 +90,19 @@ jobs:
       - run: npm run verify-ci
       - store_test_results:
           path: .reports/junit
+  node6:
+    docker:
+      - image: 'circleci/node:8'
+    steps:
+      - checkout
+      - attach_workspace:
+          at: '.'
+      - run: npm run verify-ci
+      - store_test_results:
+          path: .reports/junit
   release:
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:11
     steps:
       - checkout
       - attach_workspace:
