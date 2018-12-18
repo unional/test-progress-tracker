@@ -91,7 +91,7 @@ jobs:
           path: .reports/junit
   node6:
     docker:
-      - image: 'circleci/node:8'
+      - image: 'circleci/node:6'
     steps:
       - checkout
       - attach_workspace:
