@@ -31,7 +31,8 @@
     "chokidar": "^2.0.4",
     "global-store": "^0.7.3",
     "mkdirp": "^0.5.1",
-    "unpartial": "^0.4.1"
+    "unpartial": "^0.4.1",
+    "util.promisify": "^1.0.0"
   },
   "devDependencies": {
     "@types/chokidar": "^1.7.5",
@@ -51,6 +52,7 @@
     "jest": "^23.6.0",
     "jest-audio-reporter": "^2.2.0",
     "jest-junit": "^5.2.0",
+    "jest-progress-tracker": "^2.0.1",
     "jest-watch-repeat": "^1.0.0",
     "jest-watch-suspend": "^1.1.0",
     "jest-watch-toggle-config": "^1.0.2",

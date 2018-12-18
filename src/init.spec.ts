@@ -1,6 +1,6 @@
 import t from 'assert';
 import fs from 'fs';
-import { init } from './init';
+import { init } from '.';
 import { PROGRESS_FOLDER } from './constants';
 import rimraf = require('rimraf');
 
