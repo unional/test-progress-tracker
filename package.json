@@ -32,7 +32,7 @@
     "chokidar": "^2.0.4",
     "global-store": "^0.7.3",
     "mkdirp": "^0.5.1",
-    "unpartial": "^0.5.0",
+    "unpartial": "^0.6.0",
     "util.promisify": "^1.0.0"
   },
   "devDependencies": {
