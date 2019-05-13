@@ -27,7 +27,7 @@ workflows:
             - node8
             - node6
 jobs:
-  local-test:
+  local:
     docker:
       - image: circleci/node:11
     steps:
@@ -108,11 +108,5 @@ jobs:
       - checkout
       - attach_workspace:
           at: '.'
-      - run:
-          name: update greenkeeper lockfile
-          command: ./node_modules/.bin/greenkeeper-lockfile-update
       - run: npm run build
-      - run:
-          name: upload greenkeeper lockfile
-          command: ./node_modules/.bin/greenkeeper-lockfile-upload
       - run: npx semantic-release
