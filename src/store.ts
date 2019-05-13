@@ -1,3 +1,3 @@
-import { create } from 'global-store'
+import { createStore } from 'global-store'
 
-export const store = create(Symbol.for('test-progress-tracker'), { rootDir: '.' })
+export const store = createStore(Symbol.for('test-progress-tracker'), { rootDir: '.' })
