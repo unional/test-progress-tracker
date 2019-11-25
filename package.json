@@ -45,7 +45,7 @@
     "assertron": "^7.0.2",
     "delay": "^4.2.0",
     "dependency-check": "^3.3.0",
-    "eslint": "^6.2.1",
+    "eslint": "^6.7.1",
     "eslint-plugin-harmony": "^3.0.0",
     "jest": "^24.8.0",
     "jest-audio-reporter": "^2.2.1",
