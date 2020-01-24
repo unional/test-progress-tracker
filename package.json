@@ -31,7 +31,7 @@
   "dependencies": {
     "chokidar": "^2.1.5",
     "global-store": "^0.8.1",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.0",
     "unpartial": "^0.6.3",
     "util.promisify": "^1.0.0"
   },
