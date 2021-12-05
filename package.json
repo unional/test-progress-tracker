@@ -17,7 +17,7 @@
     "cjs"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.base.json",
+    "build": "tsc -p tsconfig.cjs.json",
     "clean": "rimraf cjs",
     "coverage": "jest --coverage",
     "dependency-check": "dependency-check . --unused --no-dev && dependency-check . --missing --no-dev",

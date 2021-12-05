@@ -1,13 +1,13 @@
-import t from 'assert';
-import { AssertOrder } from 'assertron';
-import delay from 'delay';
-import fs from 'fs';
-import path from 'path';
-import rimraf from 'rimraf';
-import { append, init, monitor, MonitorSubscription, TestResults } from '.';
-import { TEST_RESULT_FILENAME, PROGRESS_FOLDER } from './constants';
-import { store } from './store';
-import { filtered, noCoverage } from './testResultsExamples';
+import t from 'assert'
+import { AssertOrder } from 'assertron'
+import delay from 'delay'
+import fs from 'fs'
+import path from 'path'
+import rimraf from 'rimraf'
+import { append, init, monitor, MonitorSubscription, TestResults } from '.'
+import { PROGRESS_FOLDER, TEST_RESULT_FILENAME } from './constants'
+import { store } from './store'
+import { filtered, noCoverage } from './testResultsExamples'
 
 test('callback invoked with last save entry initially', async () => {
   const rootDir = 'fixtures/monitor/monitor-first'

@@ -1,6 +1,15 @@
-import t from 'assert';
-import { minify, unminify } from './minify';
-import { noCoverage, noCoverageMinified, coverageNoPercentage, coverageNoPercentageMinified, coverageWithPercentage, coverageWithPercentageMinified, filtered, filteredMinified } from './testResultsExamples';
+import t from 'assert'
+import { minify, unminify } from './minify'
+import {
+  noCoverage,
+  noCoverageMinified,
+  coverageNoPercentage,
+  coverageNoPercentageMinified,
+  coverageWithPercentage,
+  coverageWithPercentageMinified,
+  filtered,
+  filteredMinified
+} from './testResultsExamples'
 
 test('no coverage', () => {
   const minified = minify(noCoverage)

@@ -1,6 +1,6 @@
-import t from 'assert';
-import { load } from '.';
-import { store } from './store';
+import t from 'assert'
+import { load } from '.'
+import { store } from './store'
 
 test('not exist', async () => {
   store.value.rootDir = 'fixtures/not-exist'

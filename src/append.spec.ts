@@ -1,6 +1,6 @@
-import rimraf from 'rimraf';
-import { append, init, load } from '.';
-import { noCoverage } from './testResultsExamples';
+import rimraf from 'rimraf'
+import { append, init, load } from '.'
+import { noCoverage } from './testResultsExamples'
 
 test('create new file', async () => {
   const rootDir = 'fixtures/new_file'

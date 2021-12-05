@@ -1,13 +1,13 @@
-import chokidar from 'chokidar';
-import fs from 'fs';
-import path from 'path';
-import readline from 'readline';
-import { unpartial } from 'unpartial';
-import { decompress } from './compress';
-import { PROGRESS_FOLDER, TEST_RESULT_FILENAME } from './constants';
-import { TestResults } from './interface';
-import { unminify } from './minify';
-import { store } from './store';
+import chokidar from 'chokidar'
+import fs from 'fs'
+import path from 'path'
+import readline from 'readline'
+import { unpartial } from 'unpartial'
+import { decompress } from './compress'
+import { PROGRESS_FOLDER, TEST_RESULT_FILENAME } from './constants'
+import { TestResults } from './interface'
+import { unminify } from './minify'
+import { store } from './store'
 
 export interface MonitorContext {
   fs: Pick<typeof fs, 'watch'>,
