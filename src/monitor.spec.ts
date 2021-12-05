@@ -27,6 +27,8 @@ test('callback invoked with last save entry initially', async () => {
   finally {
     if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir, {})
   }
 })
@@ -50,6 +52,8 @@ test('extra empty line in the file is ignored', async () => {
   finally {
     if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
@@ -75,6 +79,8 @@ test('callback not invoked when result file not exist', async () => {
   finally {
     if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
@@ -95,6 +101,8 @@ test('delete result file should not trigger', async () => {
   finally {
     if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
@@ -115,6 +123,8 @@ test('trigger on change', async () => {
   finally {
     if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
@@ -140,6 +150,8 @@ test('trigger on new file', async () => {
   finally {
     if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
