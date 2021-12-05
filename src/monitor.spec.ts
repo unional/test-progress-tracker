@@ -57,7 +57,7 @@ test('extra empty line in the file is ignored', async () => {
 test('callback not invoked when root directory not exist', () => {
   let sub: MonitorSubscription | undefined
   try {
-    store.set({ rootDir: 'fixtures/monitor/not-exist' })
+    store.value.rootDir = 'fixtures/monitor/not-exist'
     sub = monitor(undefined, () => { throw new Error('should not call') })
   }
   finally {

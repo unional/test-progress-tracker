@@ -35,7 +35,7 @@ export function monitor(context: Partial<MonitorContext & GetLastLineContext> | 
   const c = unpartial<MonitorContext & GetLastLineContext>({
     fs,
     readline,
-    rootDir: store.get().rootDir,
+    rootDir: store.value.rootDir,
     awaitWriteFinish: true
   }, context)
   const filepath = path.join(c.rootDir, PROGRESS_FOLDER, TEST_RESULT_FILENAME)

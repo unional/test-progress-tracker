@@ -9,10 +9,10 @@ import { minify } from './minify';
 import { store } from './store';
 
 let appendFile = fs.appendFile
-let promisifedAppendFile = promisify(fs.appendFile)
+let promisifiedAppendFile = promisify(fs.appendFile)
 
 export async function append(context: Partial<FSContext<'appendFile'>> | undefined, results: TestResults) {
-  const c = unpartial<FSContext<'appendFile'>>({ fs, rootDir: store.get().rootDir }, context)
+  const c = unpartial<FSContext<'appendFile'>>({ fs, rootDir: store.value.rootDir }, context)
 
   const filepath = path.join(c.rootDir, PROGRESS_FOLDER, TEST_RESULT_FILENAME)
   const minified = minify(results)
@@ -21,8 +21,8 @@ export async function append(context: Partial<FSContext<'appendFile'>> | undefin
   // istanbul ignore next
   if (c.fs.appendFile !== appendFile) {
     appendFile = c.fs.appendFile
-    promisifedAppendFile = promisify(appendFile)
+    promisifiedAppendFile = promisify(appendFile)
   }
 
-  await promisifedAppendFile(filepath, compressed + '\n')
+  await promisifiedAppendFile(filepath, compressed + '\n')
 }

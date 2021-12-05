@@ -41,7 +41,7 @@ export function minify(testResults: TestResults) {
   return result
 }
 
-function minifyCoverage(coverage: jest.CoverageSummary) {
+function minifyCoverage(coverage: CoverageSummary) {
   const { branches, functions, lines, statements } = coverage
 
   const result: MinifiedCoverageSummary = {
