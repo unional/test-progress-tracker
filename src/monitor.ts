@@ -2,17 +2,16 @@ import chokidar from 'chokidar';
 import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
-import { Stream } from 'stream';
 import { unpartial } from 'unpartial';
 import { decompress } from './compress';
-import { TEST_RESULT_FILENAME, PROGRESS_FOLDER } from './constants';
+import { PROGRESS_FOLDER, TEST_RESULT_FILENAME } from './constants';
 import { TestResults } from './interface';
 import { unminify } from './minify';
 import { store } from './store';
 
 export interface MonitorContext {
   fs: Pick<typeof fs, 'watch'>,
-  rootDir: string
+  rootDir: string,
   awaitWriteFinish: AwaitWriteFinishOptions | boolean;
 }
 
@@ -20,12 +19,12 @@ export interface AwaitWriteFinishOptions {
   /**
    * Amount of time in milliseconds for a file size to remain constant before emitting its event.
    */
-  stabilityThreshold?: number;
+  stabilityThreshold?: number,
 
   /**
    * File size polling interval.
    */
-  pollInterval?: number;
+  pollInterval?: number
 }
 
 export interface MonitorSubscription {
@@ -36,7 +35,7 @@ export function monitor(context: Partial<MonitorContext & GetLastLineContext> | 
   const c = unpartial<MonitorContext & GetLastLineContext>({
     fs,
     readline,
-    rootDir: store.get().rootDir,
+    rootDir: store.value.rootDir,
     awaitWriteFinish: true
   }, context)
   const filepath = path.join(c.rootDir, PROGRESS_FOLDER, TEST_RESULT_FILENAME)
@@ -44,12 +43,14 @@ export function monitor(context: Partial<MonitorContext & GetLastLineContext> | 
   const w = chokidar.watch(filepath, { awaitWriteFinish: c.awaitWriteFinish })
   w.on('add', path => invokeCallback(c, path, callback))
   w.on('change', path => invokeCallback(c, path, callback))
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   return { close: w.close.bind(w) }
 }
 
 function invokeCallback(context: GetLastLineContext, filename: string, callback: (err: any, testResults: TestResults) => void) {
   getLastLine(context, filename).then(line => {
     callback(undefined, unminify(decompress(line)))
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   }).catch(callback as any)
 }
 
@@ -60,9 +61,8 @@ export interface GetLastLineContext {
 
 function getLastLine({ fs, readline }: GetLastLineContext, filename: string) {
   const inStream = fs.createReadStream(filename)
-  const outStream = new Stream()
   return new Promise<string>((a, r) => {
-    const rl = readline.createInterface(inStream, outStream as any)
+    const rl = readline.createInterface(inStream)
     let lastline = ''
     rl.on('line', (line: string) => {
       if (line.length) {

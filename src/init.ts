@@ -9,5 +9,5 @@ import { store } from './store';
  */
 export function init(options = { rootDir: '.' }) {
   mkdirp.sync(path.join(options.rootDir, PROGRESS_FOLDER))
-  store.set({ rootDir: options.rootDir })
+  store.value.rootDir = options.rootDir
 }

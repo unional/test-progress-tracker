@@ -13,9 +13,9 @@ export interface MinifiedTestResult {
   c?: MinifiedCoverageSummary
 }
 export interface MinifiedCoverageSummary {
-  b: { c: number, s: number, t: number, p?: number }
-  f: { c: number, s: number, t: number, p?: number }
-  l: { c: number, s: number, t: number, p?: number }
+  b: { c: number, s: number, t: number, p?: number },
+  f: { c: number, s: number, t: number, p?: number },
+  l: { c: number, s: number, t: number, p?: number },
   s: { c: number, s: number, t: number, p?: number }
 }
 
@@ -41,7 +41,7 @@ export function minify(testResults: TestResults) {
   return result
 }
 
-function minifyCoverage(coverage: jest.CoverageSummary) {
+function minifyCoverage(coverage: CoverageSummary) {
   const { branches, functions, lines, statements } = coverage
 
   const result: MinifiedCoverageSummary = {
