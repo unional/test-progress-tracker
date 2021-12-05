@@ -7,7 +7,7 @@ export function compress(obj: MinifiedTestResult) {
 }
 
 export function decompress(str: string): MinifiedTestResult {
-  return JSON.parse(str)
+  return JSON.parse(str) as MinifiedTestResult
   // const json = lz.decompress(str)
   // return JSON.parse(json) as MinifiedTestResult
 }

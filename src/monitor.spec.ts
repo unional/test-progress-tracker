@@ -22,7 +22,7 @@ test('callback invoked with last save entry initially', async () => {
     })
 
 
-    t.deepStrictEqual(actual!, noCoverage)
+    t.deepStrictEqual(actual, noCoverage)
   }
   finally {
     if (sub) sub.close()
@@ -45,7 +45,7 @@ test('extra empty line in the file is ignored', async () => {
     })
 
 
-    t.deepStrictEqual(actual!, noCoverage)
+    t.deepStrictEqual(actual, noCoverage)
   }
   finally {
     if (sub) sub.close()
@@ -54,7 +54,7 @@ test('extra empty line in the file is ignored', async () => {
   }
 })
 
-test('callback not invoked when root directory not exist', async () => {
+test('callback not invoked when root directory not exist', () => {
   let sub: MonitorSubscription | undefined
   try {
     store.set({ rootDir: 'fixtures/monitor/not-exist' })
@@ -65,7 +65,7 @@ test('callback not invoked when root directory not exist', async () => {
   }
 })
 
-test('callback not invoked when result file not exist', async () => {
+test('callback not invoked when result file not exist', () => {
   const rootDir = 'fixtures/monitor/monitor-no-file'
   let sub: MonitorSubscription | undefined
   try {
@@ -125,12 +125,16 @@ test('trigger on new file', async () => {
   try {
     init({ rootDir })
 
-    const actual = await new Promise<TestResults>(async a => {
-      sub = monitor({ rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } }, (_, testResults) => a(testResults))
-      // Add a small delay because in circleci it seems like chokidar can't pick up the next append (new file).
-      await delay(10)
-      await append({ rootDir }, noCoverage)
-    })
+    let accept: (v: TestResults) => void
+    const p = new Promise<TestResults>(a => accept = a)
+    sub = monitor(
+      { rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } },
+      (_, testResults) => accept(testResults)
+    )
+    // Add a small delay because in circleCI it seems like chokidar can't pick up the next append (new file).
+    await delay(10)
+    await append({ rootDir }, noCoverage)
+    const actual = await p
     t.deepStrictEqual(actual, noCoverage)
   }
   finally {
@@ -145,12 +149,8 @@ test('file already exists will call once', async () => {
   let sub: MonitorSubscription | undefined
   try {
     let count = 0
-    await new Promise<TestResults>(async a => {
-      sub = monitor({ rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } }, () => count++)
-      // Add a small delay because in circleci it seems like chokidar can't pick up the next append (new file).
-      await delay(10)
-      a()
-    })
+    sub = monitor({ rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } }, () => count++)
+    await delay(10)
     t.strictEqual(count, 1)
   }
   finally {
