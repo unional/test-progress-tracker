@@ -1,8 +1,8 @@
-import t from 'assert';
-import fs from 'fs';
-import { init } from '.';
-import { PROGRESS_FOLDER } from './constants';
-import rimraf = require('rimraf');
+import t from 'assert'
+import fs from 'fs'
+import rimraf from 'rimraf'
+import { init } from '.'
+import { PROGRESS_FOLDER } from './constants'
 
 test('create folder if not exist', () => {
   try {
