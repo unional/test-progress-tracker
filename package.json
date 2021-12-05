@@ -11,21 +11,19 @@
     "url": "https://github.com/unional/test-progress-tracker.git"
   },
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "cjs/index.js",
+  "typings": "cjs/index.d.ts",
   "files": [
-    "dist"
+    "cjs"
   ],
   "scripts": {
-    "build": "yarn clean && tsc -p tsconfig.base.json",
-    "clean": "rimraf dist",
-    "codacy-coverage": "cat ./coverage/lcov.info | codacy-coverage",
+    "build": "tsc -p tsconfig.base.json",
+    "clean": "rimraf cjs",
     "coverage": "jest --coverage",
     "dependency-check": "dependency-check . --unused --no-dev && dependency-check . --missing --no-dev",
     "lint": "eslint --ext=ts,js .",
     "test": "jest",
-    "verify": "yarn lint && yarn build && yarn coverage && yarn dependency-check",
-    "verify-ci": "yarn lint && yarn build && jest --coverage && yarn dependency-check",
+    "verify": "yarn clean && yarn lint && yarn build && yarn coverage && yarn dependency-check",
     "watch": "jest --watch"
   },
   "husky": {

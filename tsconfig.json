@@ -1,12 +1,5 @@
 {
   "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "tslint-language-server"
-      }
-    ]
-  },
   "include": [
     "src"
   ]
