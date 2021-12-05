@@ -25,9 +25,11 @@ test('callback invoked with last save entry initially', async () => {
     t.deepStrictEqual(actual, noCoverage)
   }
   finally {
-    if (sub) sub.close()
+    if (sub) await sub.close()
     init()
-    rimraf.sync(rootDir)
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
+    rimraf.sync(rootDir, {})
   }
 })
 
@@ -48,24 +50,26 @@ test('extra empty line in the file is ignored', async () => {
     t.deepStrictEqual(actual, noCoverage)
   }
   finally {
-    if (sub) sub.close()
+    if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
 
-test('callback not invoked when root directory not exist', () => {
+test('callback not invoked when root directory not exist', async () => {
   let sub: MonitorSubscription | undefined
   try {
     store.value.rootDir = 'fixtures/monitor/not-exist'
     sub = monitor(undefined, () => { throw new Error('should not call') })
   }
   finally {
-    if (sub) sub.close()
+    if (sub) await sub.close()
   }
 })
 
-test('callback not invoked when result file not exist', () => {
+test('callback not invoked when result file not exist', async () => {
   const rootDir = 'fixtures/monitor/monitor-no-file'
   let sub: MonitorSubscription | undefined
   try {
@@ -73,8 +77,10 @@ test('callback not invoked when result file not exist', () => {
     sub = monitor({ rootDir }, () => { throw new Error('should not call') })
   }
   finally {
-    if (sub) sub.close()
+    if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
@@ -93,8 +99,10 @@ test('delete result file should not trigger', async () => {
     rimraf.sync(filePath)
   }
   finally {
-    if (sub) sub.close()
+    if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
@@ -113,8 +121,10 @@ test('trigger on change', async () => {
     o.end()
   }
   finally {
-    if (sub) sub.close()
+    if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
@@ -125,8 +135,8 @@ test('trigger on new file', async () => {
   try {
     init({ rootDir })
 
-    let accept: (v: TestResults) => void
-    const p = new Promise<TestResults>(a => accept = a)
+    let accept: (v?: TestResults) => void
+    const p = new Promise<TestResults | undefined>(a => accept = a)
     sub = monitor(
       { rootDir, awaitWriteFinish: { pollInterval: 10, stabilityThreshold: 50 } },
       (_, testResults) => accept(testResults)
@@ -138,8 +148,10 @@ test('trigger on new file', async () => {
     t.deepStrictEqual(actual, noCoverage)
   }
   finally {
-    if (sub) sub.close()
+    if (sub) await sub.close()
     init()
+    // chokidar seems to have lock issue in Windows
+    await delay(100)
     rimraf.sync(rootDir)
   }
 })
@@ -154,6 +166,6 @@ test('file already exists will call once', async () => {
     t.strictEqual(count, 1)
   }
   finally {
-    if (sub) sub.close()
+    if (sub) await sub.close()
   }
 })

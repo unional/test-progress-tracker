@@ -31,16 +31,16 @@ jobs:
       - run: yarn lint
       - run: yarn build
       - run: yarn dependency-check
-      - name: upload lib folder
+      - name: upload cjs folder
         uses: actions/upload-artifact@v1
         with:
-          name: lib
-          path: lib
-      - name: upload libm folder
-        uses: actions/upload-artifact@v1
-        with:
-          name: libm
-          path: libm
+          name: cjs
+          path: cjs
+      # - name: upload esm folder
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: esm
+      #     path: esm
   test-nodejs:
     runs-on: ubuntu-latest
     needs: build
@@ -89,7 +89,8 @@ jobs:
     needs: build
     strategy:
       matrix:
-        os: ['macos-latest', 'windows-latest']
+        os: ['macos-latest']
+        # os: ['macos-latest', 'windows-latest']
     steps:
       - uses: actions/checkout@v1
         with:
@@ -131,20 +132,20 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: download lib folder
-        uses: actions/download-artifact@v1
-        with:
-          name: lib
-      - name: download libm folder
-        uses: actions/download-artifact@v1
-        with:
-          name: libm
       - name: cache node_modules
         uses: actions/cache@v1
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
       - run: yarn
+      - name: download cjs folder
+        uses: actions/download-artifact@v1
+        with:
+          name: cjs
+      # - name: download esm folder
+      #   uses: actions/download-artifact@v1
+      #   with:
+      #     name: esm
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

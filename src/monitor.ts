@@ -28,10 +28,10 @@ export interface AwaitWriteFinishOptions {
 }
 
 export interface MonitorSubscription {
-  close(): void
+  close(): Promise<void>
 }
 
-export function monitor(context: Partial<MonitorContext & GetLastLineContext> | undefined, callback: (err: any, testResults: TestResults) => void): MonitorSubscription {
+export function monitor(context: Partial<MonitorContext & GetLastLineContext> | undefined, callback: (err: any, testResults?: TestResults) => void): MonitorSubscription {
   const c = unpartial<MonitorContext & GetLastLineContext>({
     fs,
     readline,
@@ -43,15 +43,13 @@ export function monitor(context: Partial<MonitorContext & GetLastLineContext> | 
   const w = chokidar.watch(filepath, { awaitWriteFinish: c.awaitWriteFinish })
   w.on('add', path => invokeCallback(c, path, callback))
   w.on('change', path => invokeCallback(c, path, callback))
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  return { close: w.close.bind(w) }
+  return { close: () => w.close() }
 }
 
-function invokeCallback(context: GetLastLineContext, filename: string, callback: (err: any, testResults: TestResults) => void) {
+function invokeCallback(context: GetLastLineContext, filename: string, callback: (err: any, testResults?: TestResults) => void) {
   getLastLine(context, filename).then(line => {
     callback(undefined, unminify(decompress(line)))
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  }).catch(callback as any)
+  }).catch((e) => callback(e))
 }
 
 export interface GetLastLineContext {
