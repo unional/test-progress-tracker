@@ -139,7 +139,7 @@ jobs:
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
       - run: yarn
       - name: download cjs folder
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2
         with:
           name: cjs
       # - name: download esm folder
