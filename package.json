@@ -41,7 +41,7 @@
     "chokidar": "^3.5.2",
     "global-store": "^1.0.0-beta.19",
     "mkdirp": "^1.0.4",
-    "unpartial": "^0.6.4"
+    "unpartial": "^0.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
