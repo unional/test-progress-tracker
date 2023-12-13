@@ -54,7 +54,7 @@
     "@commitlint/config-conventional": "^16.0.0",
     "@types/jest": "^27.0.3",
     "@types/mkdirp": "^1.0.2",
-    "@types/node": "^16.11.11",
+    "@types/node": "^20.0.0",
     "@types/rimraf": "^3.0.2",
     "assertron": "^9.0.0",
     "delay": "^5.0.0",
