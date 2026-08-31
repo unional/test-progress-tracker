@@ -16,7 +16,7 @@
   "files": [
     "cjs",
     "ts",
-    "!ts/**/*.spec.ts"
+    "!**/*.{spec,test,unit,accept,integrate,system,perf,stress,study,stories}.*"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.cjs.json",
