@@ -1,5 +1,41 @@
 {
-  "extends": [
-    "github>unional/renovate-preset"
-  ]
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:recommended", ":preserveSemverRanges"],
+	"description": [
+		"Renovate is the only updater here, and platformAutomerge is the only merge mechanism.",
+		"The previous setup could not merge anything: it extended github>unional/renovate-preset,",
+		"a two-line preset carrying no automerge rules at all, alongside a dependabot-automerge",
+		"workflow that armed `gh pr merge --auto --squash` — a strategy this repo disallows, so",
+		"every arming attempt failed. Both are gone; this file is self-contained."
+	],
+	"labels": ["dependencies"],
+	"rangeStrategy": "replace",
+	"automerge": false,
+	"platformAutomerge": true,
+	"automergeStrategy": "merge",
+	"lockFileMaintenance": { "enabled": true, "automerge": true },
+	"packageRules": [
+		{
+			"description": "devDependencies and GitHub Actions carry no published surface, so a green `code / all-checks` is the whole review. Majors stay manual either way.",
+			"matchDepTypes": ["devDependencies"],
+			"matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+			"automerge": true
+		},
+		{
+			"matchManagers": ["github-actions"],
+			"matchUpdateTypes": ["minor", "patch", "digest"],
+			"automerge": true
+		},
+		{
+			"description": "Runtime `dependencies` reach consumers, so they need a changeset. Changesets decides the release from the changeset FILE, not the commit message — an automerged runtime bump with no changeset publishes nothing and the registry version never moves. Kept manual so a human adds one.",
+			"matchDepTypes": ["dependencies"],
+			"automerge": false,
+			"addLabels": ["needs-changeset"]
+		},
+		{
+			"description": "Majors break builds in ways CI catches but a human should choose to absorb.",
+			"matchUpdateTypes": ["major"],
+			"automerge": false
+		}
+	]
 }

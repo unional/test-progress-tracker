@@ -1,0 +1,26 @@
+# `minimumReleaseAge` only runs STRICT when it comes from here (or config.yaml / CLI /
+# env). It used to live in `.npmrc` as `minimumreleaseage=1440`, which npm rejects as an
+# unknown key and pnpm reads in LOOSE mode: a too-young package is not refused, it is
+# silently appended to `minimumReleaseAgeExclude` and installed anyway. Keep both keys
+# together, here.
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true
+
+# Native postinstalls pnpm blocks by default. Remove an entry when the tool that pulled
+# it in leaves.
+onlyBuiltDependencies:
+  - esbuild
+
+# Exact-version exclusions only, and every one of them is a first-party package from the
+# owner's own modernization sweep, published within the last 24h on the same day as this
+# change. The soak exists to catch a compromised third-party release; it cannot catch
+# anything here, and without these the sweep cannot pick up its own upstreams.
+# `assertron` and `unpartial` are the direct ones; the rest arrive through assertron.
+# Delete each entry once its version ages past the cutoff.
+minimumReleaseAgeExclude:
+  - assertron@11.5.4
+  - iso-error@6.0.5
+  - path-equal@1.2.7
+  - satisfier@5.4.4
+  - tersify@4.0.6
+  - unpartial@1.0.7
