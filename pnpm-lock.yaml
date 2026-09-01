@@ -64,8 +64,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       assertron:
-        specifier: ^9.0.0
-        version: 9.2.5
+        specifier: ^11.0.0
+        version: 11.5.3
       delay:
         specifier: ^5.0.0
         version: 5.0.0
@@ -1305,8 +1305,9 @@ packages:
     resolution: {integrity: sha512-3CYzex9M9FGQjCGMGyi6/31c8GJbgb0qGyrx5HWxPd0aCwh4cB2YjMb2Xf9UuoogrMrlO9cTqnB5rI5GHZTcUA==}
     engines: {node: '>=0.10.0'}
 
-  assertron@9.2.5:
-    resolution: {integrity: sha512-K1UX8W+6dkWW9obv7N/RIFpOK2ZrT4ukVNbfb3mTDravbHIZPbdc4NoyyA8UDuGqScnBfGhFn09dkihw6dZ3Wg==}
+  assertron@11.5.3:
+    resolution: {integrity: sha512-cCB8v8SKcOjYjdrDfOHWAlGIYznBeShTcaJQ4M9vLzSrgD86epmD4wMfvyRW38GjO7VX8eSR5P4O3HWTuITtpg==}
+    engines: {node: '>= 10'}
 
   async-function@1.0.0:
     resolution: {integrity: sha512-hsU18Ae8CDTR6Kgu9DYf0EbCr/a5iGL0rytQDobUcdpYOKokk8LEjVphnXkDkgpi0wYVsqrXuP0bZxJaTqdgoA==}
@@ -2177,10 +2178,6 @@ packages:
     resolution: {integrity: sha512-5KoIu2Ngpyek75jXodFvnafB6DJgr3u8uuK0LEZJjrU19DrMD3EVERaR8sjz8CCGgpZvxPl9SuE1GMVPFHx1mw==}
     engines: {node: '>= 0.4'}
 
-  is-node@1.1.1:
-    resolution: {integrity: sha512-61p7HKQkk1/FxHHB4igz1bEbH7ltKKocRza1N8uH4xJQLSzJDNuE5OLpb8kDtBN+0otXI1/45q8/Uk4/g5UtuQ==}
-    engines: {node: '>= 0.10'}
-
   is-number-object@1.1.1:
     resolution: {integrity: sha512-lZhclumE1G6VYD8VHe35wFaIif+CTy5SJIi5+3y4psDgWu4wPDoBhF8NxUOinEc7pHgiTsT6MaBb92rKhhD+Xw==}
     engines: {node: '>= 0.4'}
@@ -2268,8 +2265,8 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
-  iso-error@4.4.1:
-    resolution: {integrity: sha512-58c3PSbrzhZxVvT6WrQiGt3FEyL7WdXl4+Z+5QM1R2NnZ6xik7X9Nz0RBnkWep6906w0fiMU+YI9EOrYr1QjvQ==}
+  iso-error@6.0.3:
+    resolution: {integrity: sha512-QVdiQdEbZ3aiW7KMxenB0jvKygpiy9FMjitW6q6DaGXbVjLiu3zYPmrKG/Jts7xTXSIrZ8Wrst0KaS+r9+ys7g==}
     engines: {node: '>= 10'}
 
   istanbul-lib-coverage@3.2.2:
@@ -3340,8 +3337,8 @@ packages:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
 
-  type-plus@4.18.1:
-    resolution: {integrity: sha512-/Dq0K/TUedajerhr2JuXhw44V2tiAniGvyZJL23PqxjUzxrXeASWvfi01Bo8o6mudRXJL/sfBD+KZiHSzrhZ9g==}
+  type-plus@7.6.2:
+    resolution: {integrity: sha512-qUlXv9Y0/W56pg38m275IMD3WA03QbVoqNY16S3kmwtuA4gOT2iheyUdOp8NWrmXWpf7om98hzr7AZD/eW2jLA==}
 
   typed-array-buffer@1.0.3:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
@@ -5172,15 +5169,14 @@ snapshots:
 
   arrify@1.0.1: {}
 
-  assertron@9.2.5:
+  assertron@11.5.3:
     dependencies:
-      is-node: 1.1.1
       is-promise: 4.0.0
-      iso-error: 4.4.1
+      iso-error: 6.0.3
       path-equal: 1.2.5
       satisfier: 5.4.3
-      tersify: 3.12.1
-      type-plus: 4.18.1
+      tersify: 4.0.2
+      type-plus: 7.6.2
 
   async-function@1.0.0: {}
 
@@ -6209,8 +6205,6 @@ snapshots:
 
   is-negative-zero@2.0.3: {}
 
-  is-node@1.1.1: {}
-
   is-number-object@1.1.1:
     dependencies:
       call-bound: 1.0.4
@@ -6287,7 +6281,7 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  iso-error@4.4.1: {}
+  iso-error@6.0.3: {}
 
   istanbul-lib-coverage@3.2.2: {}
 
@@ -7632,7 +7626,7 @@ snapshots:
 
   type-fest@0.8.1: {}
 
-  type-plus@4.18.1:
+  type-plus@7.6.2:
     dependencies:
       tersify: 3.12.1
       unpartial: 1.0.6
