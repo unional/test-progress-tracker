@@ -1,6 +1,32 @@
 {
-  "extends": "./tsconfig.cjs.json",
-  "include": [
-    "ts"
-  ]
+	"compilerOptions": {
+		"declaration": true,
+		"esModuleInterop": true,
+		// An explicit `lib` REPLACES the default set, so it has to be kept in step with
+		// `target` by hand. It used to say `es2015`, which left out `Error.cause` and
+		// `AggregateError`.
+		"lib": ["es2023"],
+		// Typecheck-only: tsdown emits the CommonJS at `cjs/`, and vitest runs the specs.
+		// `preserve`/`bundler` is what both of those actually do, and it is the only
+		// setting TypeScript 7 accepts here — `node10` was removed, and `node16` refuses
+		// the ESM-only devDependencies (delay, tsdown, vitest) that CJS files import.
+		// The published CommonJS surface is proved separately, by typechecking a consumer
+		// against the packed tarball under `--module nodenext`.
+		"module": "preserve",
+		"moduleResolution": "bundler",
+		"newLine": "LF",
+		"noEmit": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"removeComments": false,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"target": "es2022",
+		// TypeScript 7 no longer auto-includes every `@types/*` package, so the ones this
+		// repo relies on are named here.
+		"types": ["node", "vitest/globals"]
+	},
+	"include": ["ts", "tsdown.config.ts", "vitest.config.mts"]
 }

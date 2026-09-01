@@ -1,0 +1,16 @@
+# One package per line — never a wildcard. A `jest-*` glob elsewhere hid four packages
+# that nothing referenced any more.
+ignores:
+  # bin-only, invoked from `scripts`
+  - '@biomejs/biome'
+  - depcheck
+  - npm-run-all2
+  - rimraf
+  - tsdown
+  - turbo
+  - typescript
+  # invoked by .husky/commit-msg, and loaded by config files rather than imported
+  - '@commitlint/config-conventional'
+  - '@commitlint/cli'
+  - '@repobuddy/biome'
+  - '@vitest/coverage-v8'

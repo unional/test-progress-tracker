@@ -1,77 +1,68 @@
 {
-  "name": "test-progress-tracker",
-  "version": "2.0.7",
-  "description": "Keep track of test progress over time",
-  "homepage": "https://github.com/cyberuni/test-progress-tracker",
-  "bugs": {
-    "url": "https://github.com/cyberuni/test-progress-tracker/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cyberuni/test-progress-tracker.git"
-  },
-  "license": "MIT",
-  "main": "cjs/index.js",
-  "typings": "cjs/index.d.ts",
-  "files": [
-    "cjs",
-    "ts",
-    "!**/*.{spec,test,unit,accept,integrate,system,perf,stress,study,stories}.*"
-  ],
-  "scripts": {
-    "build": "tsc -p tsconfig.cjs.json",
-    "clean": "rimraf cjs",
-    "coverage": "jest --coverage",
-    "cs": "changeset",
-    "dependency-check": "run-p dependency-check:unused dependency-check:missing",
-    "dependency-check:missing": "dependency-check . --missing --no-dev",
-    "dependency-check:unused": "dependency-check . --unused --no-dev",
-    "lint": "eslint --ext=ts,js .",
-    "release": "changeset publish",
-    "size-limit": "echo no size-limit",
-    "test": "jest",
-    "verify": "run-p verify:build lint coverage",
-    "verify:build": "run-s build dependency-check size-limit",
-    "version": "changeset version",
-    "watch": "jest --watch"
-  },
-  "dependencies": {
-    "chokidar": "^3.5.2",
-    "global-store": "^1.0.0-beta.19",
-    "mkdirp": "^1.0.4",
-    "unpartial": "^0.6.4"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/plugin-proposal-class-properties": "^7.16.0",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-typescript": "^7.16.0",
-    "@changesets/cli": "^3.0.0",
-    "@commitlint/cli": "^16.0.0",
-    "@commitlint/config-conventional": "^16.0.0",
-    "@types/glob": "^8.1.0",
-    "@types/jest": "^27.0.3",
-    "@types/mkdirp": "^1.0.2",
-    "@types/node": "^16.11.11",
-    "@types/rimraf": "^3.0.2",
-    "assertron": "^9.0.0",
-    "delay": "^5.0.0",
-    "dependency-check": "^4.1.0",
-    "eslint": "^8.4.0",
-    "eslint-plugin-harmony": "^6.0.0",
-    "is-ci": "^3.0.1",
-    "jest": "^27.4.3",
-    "jest-junit": "^13.0.0",
-    "jest-progress-tracker": "^3.0.0",
-    "jest-validate": "^27.4.2",
-    "jest-watch-suspend": "^1.1.2",
-    "jest-watch-toggle-config": "^2.0.1",
-    "jest-watch-typeahead": "^1.0.0",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.0",
-    "typescript": "^4.5.2"
-  },
-  "packageManager": "pnpm@11.20.0"
+	"name": "test-progress-tracker",
+	"version": "2.0.7",
+	"description": "Keep track of test progress over time",
+	"homepage": "https://github.com/cyberuni/test-progress-tracker",
+	"bugs": {
+		"url": "https://github.com/cyberuni/test-progress-tracker/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cyberuni/test-progress-tracker.git"
+	},
+	"license": "MIT",
+	"main": "cjs/index.js",
+	"typings": "cjs/index.d.ts",
+	"files": [
+		"cjs",
+		"ts",
+		"!**/*.{spec,test,unit,accept,integrate,system,perf,stress,study,stories}.*"
+	],
+	"scripts": {
+		"build": "tsdown",
+		"check": "biome check",
+		"check:fix": "biome check --fix",
+		"clean": "rimraf cjs coverage .turbo",
+		"coverage": "vitest run --coverage",
+		"cs": "changeset",
+		"depcheck": "depcheck",
+		"format": "biome format . --write",
+		"lint": "biome lint .",
+		"nuke": "pnpm clean && rimraf node_modules",
+		"prepare": "husky",
+		"release": "changeset publish",
+		"test": "vitest run",
+		"typecheck": "tsc",
+		"verify": "run-p lint verify:pkg",
+		"verify:pkg": "turbo run build typecheck coverage depcheck",
+		"version": "changeset version",
+		"watch": "vitest"
+	},
+	"dependencies": {
+		"chokidar": "^3.6.0",
+		"global-store": "^1.0.0-beta.21",
+		"mkdirp": "^1.0.4",
+		"unpartial": "^1.0.7"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.7",
+		"@changesets/cli": "^3.0.0",
+		"@commitlint/cli": "^21.0.0",
+		"@commitlint/config-conventional": "^21.0.0",
+		"@repobuddy/biome": "^2.3.1",
+		"@types/mkdirp": "^1.0.2",
+		"@types/node": "^24.12.2",
+		"@vitest/coverage-v8": "^4.0.18",
+		"assertron": "^11.5.4",
+		"delay": "^7.0.0",
+		"depcheck": "^1.4.7",
+		"husky": "^9.1.7",
+		"npm-run-all2": "^9.0.0",
+		"rimraf": "^6.0.1",
+		"tsdown": "^0.22.14",
+		"turbo": "^2.10.3",
+		"typescript": "^7.0.2",
+		"vitest": "^4.0.18"
+	},
+	"packageManager": "pnpm@11.20.0"
 }
