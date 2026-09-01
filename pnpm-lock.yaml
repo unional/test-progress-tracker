@@ -55,8 +55,8 @@ importers:
         specifier: ^27.0.3
         version: 27.5.2
       '@types/mkdirp':
-        specifier: ^1.0.2
-        version: 1.0.2
+        specifier: ^2.0.0
+        version: 2.0.0
       '@types/node':
         specifier: ^16.11.11
         version: 16.18.126
@@ -1105,8 +1105,9 @@ packages:
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
 
-  '@types/mkdirp@1.0.2':
-    resolution: {integrity: sha512-o0K1tSO0Dx5X6xlU5F1D6625FawhC3dU3iqr25lluNv/+/QIVH8RLNEiVokgIZo+mz+87w/3Mkg/VvQS+J51fQ==}
+  '@types/mkdirp@2.0.0':
+    resolution: {integrity: sha512-c/iUqMymAlxLAyIK3u5SzrwkrkyOdv1XDc91T+b5FsY7Jr6ERhUD19jJHOhPW4GD6tmN6mFEorfSdks525pwdQ==}
+    deprecated: This is a stub types definition. mkdirp provides its own type definitions, so you do not need this installed.
 
   '@types/node@16.18.126':
     resolution: {integrity: sha512-OTcgaiwfGFBKacvfwuHzzn1KLxH/er8mluiy8/uM3sGXHaRe73RrSIj01jow9t4kJEW633Ov+cOexXeiApTyAw==}
@@ -4950,9 +4951,9 @@ snapshots:
 
   '@types/minimist@1.2.5': {}
 
-  '@types/mkdirp@1.0.2':
+  '@types/mkdirp@2.0.0':
     dependencies:
-      '@types/node': 16.18.126
+      mkdirp: 1.0.4
 
   '@types/node@16.18.126': {}
 
