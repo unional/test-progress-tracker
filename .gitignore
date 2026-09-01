@@ -48,3 +48,6 @@ typings
 .reports
 dist
 cjs
+
+# publish gate local run output
+publish-gate-report.md
