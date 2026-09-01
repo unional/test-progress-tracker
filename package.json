@@ -1,6 +1,6 @@
 {
 	"name": "test-progress-tracker",
-	"version": "2.0.7",
+	"version": "2.0.8",
 	"description": "Keep track of test progress over time",
 	"homepage": "https://github.com/cyberuni/test-progress-tracker",
 	"bugs": {
