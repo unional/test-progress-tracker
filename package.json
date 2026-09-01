@@ -55,7 +55,7 @@
     "@types/jest": "^27.0.3",
     "@types/mkdirp": "^1.0.2",
     "@types/node": "^16.11.11",
-    "@types/rimraf": "^3.0.2",
+    "@types/rimraf": "^4.0.0",
     "assertron": "^9.0.0",
     "delay": "^5.0.0",
     "dependency-check": "^4.1.0",
