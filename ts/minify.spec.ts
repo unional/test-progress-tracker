@@ -1,44 +1,44 @@
-import t from 'assert'
+import t from 'node:assert'
 import { minify, unminify } from './minify'
 import {
-  noCoverage,
-  noCoverageMinified,
-  coverageNoPercentage,
-  coverageNoPercentageMinified,
-  coverageWithPercentage,
-  coverageWithPercentageMinified,
-  filtered,
-  filteredMinified
+	coverageNoPercentage,
+	coverageNoPercentageMinified,
+	coverageWithPercentage,
+	coverageWithPercentageMinified,
+	filtered,
+	filteredMinified,
+	noCoverage,
+	noCoverageMinified
 } from './testResultsExamples'
 
 test('no coverage', () => {
-  const minified = minify(noCoverage)
-  t.deepStrictEqual(minified, noCoverageMinified)
+	const minified = minify(noCoverage)
+	t.deepStrictEqual(minified, noCoverageMinified)
 
-  const unminified = unminify(minified)
-  t.deepStrictEqual(unminified, noCoverage)
+	const unminified = unminify(minified)
+	t.deepStrictEqual(unminified, noCoverage)
 })
 
 test('filtered', () => {
-  const minified = minify(filtered)
-  t.deepStrictEqual(minified, filteredMinified)
+	const minified = minify(filtered)
+	t.deepStrictEqual(minified, filteredMinified)
 
-  const unminified = unminify(minified)
-  t.deepStrictEqual(unminified, filtered)
+	const unminified = unminify(minified)
+	t.deepStrictEqual(unminified, filtered)
 })
 
 test('with coverage no percentage', () => {
-  const minified = minify(coverageNoPercentage)
-  t.deepStrictEqual(minified, coverageNoPercentageMinified)
+	const minified = minify(coverageNoPercentage)
+	t.deepStrictEqual(minified, coverageNoPercentageMinified)
 
-  const unminified = unminify(minified)
-  t.deepStrictEqual(unminified, coverageNoPercentage)
+	const unminified = unminify(minified)
+	t.deepStrictEqual(unminified, coverageNoPercentage)
 })
 
 test('with coverage with percentage', () => {
-  const minified = minify(coverageWithPercentage)
-  t.deepStrictEqual(minified, coverageWithPercentageMinified)
+	const minified = minify(coverageWithPercentage)
+	t.deepStrictEqual(minified, coverageWithPercentageMinified)
 
-  const unminified = unminify(minified)
-  t.deepStrictEqual(unminified, coverageWithPercentage)
+	const unminified = unminify(minified)
+	t.deepStrictEqual(unminified, coverageWithPercentage)
 })

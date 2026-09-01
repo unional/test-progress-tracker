@@ -1,17 +1,10 @@
 {
-  "cSpell.words": [
-    "promisified",
-    "unminified",
-    "unminify",
-    "unpartial"
-  ],
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "tsconfig.*.json"
-      ],
-      "url": "http://json.schemastore.org/tsconfig"
-    }
-  ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+	"cSpell.words": ["promisified", "unminified", "unminify", "unpartial"],
+	"json.schemas": [
+		{
+			"fileMatch": ["tsconfig.*.json"],
+			"url": "http://json.schemastore.org/tsconfig"
+		}
+	],
+	"typescript.tsdk": "node_modules/typescript/lib"
 }
