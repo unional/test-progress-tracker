@@ -2,13 +2,13 @@
 	"name": "test-progress-tracker",
 	"version": "2.0.8",
 	"description": "Keep track of test progress over time",
-	"homepage": "https://github.com/cyberuni/test-progress-tracker",
+	"homepage": "https://github.com/repobuddy/test-progress-tracker",
 	"bugs": {
-		"url": "https://github.com/cyberuni/test-progress-tracker/issues"
+		"url": "https://github.com/repobuddy/test-progress-tracker/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cyberuni/test-progress-tracker.git"
+		"url": "https://github.com/repobuddy/test-progress-tracker.git"
 	},
 	"license": "MIT",
 	"main": "cjs/index.js",
